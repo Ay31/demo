@@ -2,7 +2,7 @@ module.exports = {
   devServer: {
     proxy: {
       'api': {
-        target: 'https://douban.uieee.com/',
+        target: 'https://douban-api.uieee.com/',
         ws: true,
         secure: false,
         changeOrigin: true,
