@@ -35,17 +35,17 @@
         </div>
       </el-main>
       <el-main>
-      <h3>Popular-review</h3>
-      <el-collapse>
-        <el-collapse-item
-          :title="review.title"
-          :name="review.id"
-          v-for="review of movie.popular_reviews"
-          :key="review.id"
-        >
-          <div class="review">{{review.summary}}</div>
-        </el-collapse-item>
-      </el-collapse>
+        <h3>Popular-review</h3>
+        <el-collapse>
+          <el-collapse-item
+            :title="review.title"
+            :name="review.id"
+            v-for="review of review"
+            :key="review.id"
+          >
+            <div class="review">{{review.summary}}</div>
+          </el-collapse-item>
+        </el-collapse>
       </el-main>
     </el-container>
   </div>
@@ -65,7 +65,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["movie"])
+    ...mapGetters(["movie"]),
+    review: function() {
+      return this.movie.popular_reviews.filter(arr => {
+        return arr.title.length < 20;
+      }) ;
+    }
   },
   methods: {
     ...mapActions(["getMovieMsg"])
@@ -120,7 +125,7 @@ export default {
 }
 
 .el-main:first-of-type {
-  padding-top 8vw
+  padding-top: 8vw;
   padding-bottom: 0;
 }
 
@@ -129,13 +134,14 @@ export default {
 }
 
 h2 {
-  display inline-block  
+  display: inline-block;
 }
+
 a {
-  font-size 1.3em
+  font-size: 1.3em;
   float: right;
-  position relative
-  top 50%
-  transform translateY(-50%)
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>
